@@ -70,7 +70,7 @@ def stuff():
     collection = db.uptrendTechnicals
     online_users = collection.find()
     for usr in online_users:
-        q = nse.get_quote(usr['scripCode'])
+        q = nse.get_quote(str(usr['scripCode']))
         temp.append(q.get("lastPrice"))
         ltp = q.get("lastPrice")
         ltp = int(ltp)        
@@ -385,7 +385,7 @@ def stuff1():
     online_users = collection.find()
 
     for usr in online_users:        
-        detailedData = nse.get_quote(usr['scripCode'])
+        detailedData = nse.get_quote(str(usr['scripCode']))
         
         temp.append(detailedData.get("lastPrice"))
         ltp = detailedData.get("lastPrice")

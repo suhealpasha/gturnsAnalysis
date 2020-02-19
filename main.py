@@ -30,7 +30,8 @@ import base64
 nse = Nse()
 
 app = Flask(__name__)
-
+app.config['MONGO_URI']='mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/uptrendAnalysis?retryWrites=true'
+mongo = PyMongo(app)
 
 
 
@@ -46,9 +47,7 @@ def index1():
     online_users=[]
     users_list=[]
 
-    client = MongoClient("mongodb://localhost:27017/")
-    db = client.uptrendAnalysis
-    collection = db.uptrendTechnicals
+    collection = mongo.db.uptrendTechnicals
     online_users = collection.find()
     for users in online_users:
         users['_id'] = str(users['_id'])
@@ -68,7 +67,7 @@ def stuff():
     flagStatus=[]
     entryLevelData=[]
     riskData=[]
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     online_users = collection.find()
@@ -99,7 +98,7 @@ def stuff():
                 # to="+919743230136",
                 # from_="+12564483976",
                 # body=str(q['companyName'])+' Has hit '+str(fs['timeline'])+' demand at Entry Level price of '+str(fs['entryLevel'])+'.')
-                client = MongoClient("mongodb://localhost:27017/")
+                client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
                 db = client.uptrendAnalysis
                 collection = db.uptrendTechnicals
                 myquery = { "scripCode":usr['scripCode'] }
@@ -140,7 +139,7 @@ def register():
             break
 
 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection.insert_one({
@@ -172,7 +171,7 @@ def register():
 
 @app.route('/<scripCode>', methods=['DELETE'])
 def delRegister(scripCode):
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection1 = db.uptrendTechnicalsMessages
@@ -188,7 +187,7 @@ def editRegister(scripCode):
     risk = int(entry_level) - int(stop_loss)
     timeline = request.get_json()['timeline']
     resultTechTarget = int(entry_level) + ( risk * 2)
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection.update_one(
@@ -221,7 +220,7 @@ def editRegisterHolding(scripCode):
     today = date.today()
     d1 = today.strftime("%d/%m/%Y")   
     order = request.get_json()['order']
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection.update_one(
@@ -241,7 +240,7 @@ def editRegisterHolding(scripCode):
 
 @app.route('/editStockHoldingsRemove/<itemNo>', methods=['DELETE'])
 def editRegisterHoldingRemove(itemNo):    
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection.update_one({},{"$pull":{"order":{'itemNumber':float(itemNo)}}})
@@ -259,7 +258,7 @@ def messageRegister(scripCode):
     target_price = request.get_json()['target_price']
     condition = request.get_json()['condition']
     message = request.get_json()['message']
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicalsMessages
     collection.insert_one(
@@ -284,7 +283,7 @@ def messages():
     notifications=[]
     message_list=[]
 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicalsMessages
     notifications = collection.find()
@@ -303,7 +302,7 @@ def holdings():
     ltp_list=[]
     notifications=[]
     message_list=[]
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     notifications = collection.find({'order': { '$exists': True, '$ne': False }})
@@ -321,7 +320,7 @@ def holdings():
                     dueTo = 'Stop Loss'
                 if ltp >= notify['techTarget'] or ltp <= int(notify['stopLoss']):                   
                     
-                    client = MongoClient("mongodb://localhost:27017/")
+                    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
                     db = client.uptrendAnalysis
                     collection = db.uptrendExecutionSellNotifications
                     collection.insert_one({
@@ -382,7 +381,7 @@ def stuff1():
     temp=[]
     temp1=[]
     indicies=[]
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicalsMessages
     online_users = collection.find()
@@ -403,7 +402,7 @@ def stuff1():
             account_sid = 'ACc02942297798e5633d1de8b0d36971b0'
             auth_token = '54dc5903fff1259ae906bb43c2f8f545'
             client = Client(account_sid, auth_token)
-            clt = MongoClient("mongodb://localhost:27017/")
+            clt = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
             db = clt.uptrendAnalysis
 
             if(con == 'LTP Lesser than or Equal to'):
@@ -456,7 +455,7 @@ def stuff1():
 
 @app.route('/Observation/<scripCode>', methods=['DELETE'])
 def delRegisterAlert(scripCode):
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis    
     collection1 = db.uptrendTechnicalsMessages
     myquery = { "scripCode":scripCode.strip() }
@@ -469,7 +468,7 @@ def editRegisterMessage(_id):
     target_price = request.get_json()['target_price']
     condition = request.get_json()['condition']
     message = request.get_json()['message']
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicalsMessages
     collection.update_one(
@@ -494,7 +493,7 @@ def editRegisterMessage(_id):
 
 @app.route('/send_message')
 def subscribe():
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionNotifications
     res = collection.find().sort("executeDate", -1)
@@ -512,7 +511,7 @@ def subscribe():
 
 @app.route('/send_sell_message')
 def seller():
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionSellNotifications
     res = collection.find().sort("executeDate", -1)
@@ -540,7 +539,7 @@ def registerExecute():
     quantity = request.get_json()['quantity']
 
 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionNotifications
     collection.insert_one({
@@ -571,7 +570,7 @@ def registerExecute():
 @app.route('/Execution',methods=['GET'])
 def notificationMessages():      
     message_list=[]
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionNotifications
     notifications = collection.find()
@@ -665,7 +664,7 @@ def sendEmailSell(param):
 
 @app.route('/removeExecution/<_id>', methods=['DELETE'])
 def delExecution(_id): 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionNotifications
     myquery = { "_id":ObjectId(_id)}
@@ -687,7 +686,7 @@ def registerSellExecute():
     tech_target = request.get_json()['tech_target']
     sold_due_to = request.get_json()['sold_due_to']
 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionSellNotifications
     collection.insert_one({
@@ -721,7 +720,7 @@ def registerSellExecute():
 @app.route('/SellExecution',methods=['GET'])
 def notificationSellMessages():  
     message_list=[]
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionSellNotifications
     notifications = collection.find()
@@ -741,7 +740,7 @@ def notificationSellMessages():
 
 @app.route('/removeSellExecution/<_id>', methods=['DELETE'])
 def delSellExecution(_id): 
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionSellNotifications
     myquery = { "_id":ObjectId(_id)}
@@ -751,7 +750,7 @@ def delSellExecution(_id):
 @app.route('/rollbackSellExecution/<item>', methods = ['POST','DELETE'])
 def rollbackSell(item):   
     arg = item.split('_')
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     soldDue = collection.find_one( {"scripCode":arg[0].strip(),'order.itemNumber':float(arg[1].strip())})
@@ -787,7 +786,7 @@ def rollbackSell(item):
 @app.route('/holdingsSold/<param>', methods=['POST'])
 def editOrderSold(param):
     arg = param.split('_')
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals    
     collection.update_one(
@@ -810,7 +809,7 @@ def editOrderSold(param):
 @app.route('/updateOrderFlag/<param>', methods=['POST'])
 def editOrderFlag(param): 
     arg = param.split('_')   
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb+srv://suheal:suheal@cluster0-52qhc.mongodb.net/test?retryWrites=true")
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     collection.update_one(

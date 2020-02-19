@@ -22,8 +22,8 @@ from playsound import playsound
 import json,os
 import random
 from bson import ObjectId
-import win10toast
-from pynotifier import Notification
+# import win10toast
+# from pynotifier import Notification
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail,Attachment,FileContent, FileName, FileType, Disposition, ContentId
 import base64
@@ -351,12 +351,12 @@ def holdings():
                     )
                     collection = db.uptrendExecutionSellNotifications
                     res = collection.find().sort("executeDate", -1)   
-                    Notification(
-	                title='GTurns',
-	                description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
-	                duration=5, 
-  	                urgency=Notification.URGENCY_CRITICAL
-                    ).send()   
+                    # Notification(
+	                # title='GTurns',
+	                # description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
+	                # duration=5, 
+  	                # urgency=Notification.URGENCY_CRITICAL
+                    # ).send()   
                     # toaster = win10toast.ToastNotifier()
                     # toaster.show_toast('GTurns','Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),threaded=True) 
                     # while toaster.notification_active(): time.sleep(0.1)  
@@ -498,12 +498,12 @@ def subscribe():
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionNotifications
     res = collection.find().sort("executeDate", -1)
-    Notification(
-	title='GTurns',
-	description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
-	duration=5, 
-  	urgency=Notification.URGENCY_CRITICAL
-    ).send()  
+    # Notification(
+	# title='GTurns',
+	# description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
+	# duration=5, 
+  	# urgency=Notification.URGENCY_CRITICAL
+    # ).send()  
     
     # toaster = win10toast.ToastNotifier()
     # toaster.show_toast('GTurns','Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),threaded=True) 
@@ -516,12 +516,12 @@ def seller():
     db = client.uptrendAnalysis
     collection = db.uptrendExecutionSellNotifications
     res = collection.find().sort("executeDate", -1)
-    Notification(
-	title='GTurns',
-	description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
-	duration=5, 
-  	urgency=Notification.URGENCY_CRITICAL
-    ).send()  
+    # Notification(
+	# title='GTurns',
+	# description='Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),
+	# duration=5, 
+  	# urgency=Notification.URGENCY_CRITICAL
+    # ).send()  
     # toaster = win10toast.ToastNotifier()
     # toaster.show_toast('GTurns','Stock Name: '+str(res[0]['scripName'])+'\n' +'Action: '+str(res[0]['timeline'])+'\n' +'Quantity: '+str(res[0]['quantity']),threaded=True) 
     # while toaster.notification_active(): time.sleep(0.1)  

@@ -75,6 +75,7 @@ def stuff():
         print(usr['scripCode'])
         print(type(usr['scripCode']))
         convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
+        print(convertedToString)
         q = nse.get_quote(convertedToString)
         print(q)
         temp.append(q.get("lastPrice"))

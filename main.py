@@ -25,6 +25,8 @@ from bson import ObjectId
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail,Attachment,FileContent, FileName, FileType, Disposition, ContentId
 import base64
+import unicodedata
+
 nse = Nse()
 
 app = Flask(__name__)
@@ -72,7 +74,9 @@ def stuff():
     for usr in online_users:
         print(usr['scripCode'])
         print(type(usr['scripCode']))
-        q = nse.get_quote(usr['scripCode'])
+        convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
+        q = nse.get_quote(convertedToString)
+        print(q)
         temp.append(q.get("lastPrice"))
         ltp = q.get("lastPrice")
         ltp = int(ltp)        

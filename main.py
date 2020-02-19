@@ -1,8 +1,6 @@
 from playsound import playsound
 from flask import Flask, jsonify, render_template, request,Response
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean
-from pywebpush import webpush, WebPushException
+from flask_pymongo import PyMongo
 import logging
 from pymongo import MongoClient
 from bson.objectid import ObjectId

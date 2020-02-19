@@ -393,14 +393,16 @@ def stuff1():
     collection = db.uptrendTechnicalsMessages
     online_users = collection.find()
 
-    for usr in online_users:        
-        detailedData = nse.get_quote(usr['scripCode'])
-        
+    for usr in online_users:     
+        print(usr['scripCode'])
+        print(type(usr['scripCode']))
+        convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
+        print(convertedToString) 
+        detailedData = nse.get_quote(convertedToString)        
         temp.append(detailedData.get("lastPrice"))
         ltp = detailedData.get("lastPrice")
         ltp = int(ltp)
         temp1.append(detailedData.get("pChange"))
-
         myquery = { "scripName":detailedData['companyName'] }
         flagStatus= collection.find(myquery)
 

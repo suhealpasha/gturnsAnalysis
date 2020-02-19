@@ -71,13 +71,9 @@ def stuff():
     db = client.uptrendAnalysis
     collection = db.uptrendTechnicals
     online_users = collection.find()
-    for usr in online_users:
-        print(usr['scripCode'])
-        print(type(usr['scripCode']))
+    for usr in online_users:      
         convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
-        print(convertedToString)
-        print(type(convertedToString))
-        print(nse.get_quote('tcs'))
+        print("--------------Reached Code till here-----------")        
         q = nse.get_quote(convertedToString)
         print(q)
         temp.append(q.get("lastPrice"))

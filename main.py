@@ -74,7 +74,7 @@ def stuff():
     for usr in online_users:      
         convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
         print("--------------Reached Code till here-----------")        
-        q = nse.get_quote(convertedToString)
+        q = nse.get_quote(usr['scripCode'])
         print(q)
         temp.append(q.get("lastPrice"))
         ltp = q.get("lastPrice")
@@ -394,7 +394,7 @@ def stuff1():
         print(type(usr['scripCode']))
         convertedToString = unicodedata.normalize('NFKD', usr['scripCode']).encode('ascii','ignore')
         print(convertedToString) 
-        detailedData = nse.get_quote(convertedToString)        
+        detailedData = nse.get_quote(usr['scripCode'])        
         temp.append(detailedData.get("lastPrice"))
         ltp = detailedData.get("lastPrice")
         ltp = int(ltp)

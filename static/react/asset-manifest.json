@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/react//css/main.58f0c2db.chunk.css",
+    "main.js": "/static/react/js/main.c33bac45.chunk.js",
+    "main.js.map": "/static/react/js/main.c33bac45.chunk.js.map",
+    "runtime-main.js": "/static/react/js/runtime-main.fe911859.js",
+    "runtime-main.js.map": "/static/react/js/runtime-main.fe911859.js.map",
+    "js/2.9f265ca3.chunk.js": "/static/react/js/2.9f265ca3.chunk.js",
+    "js/2.9f265ca3.chunk.js.map": "/static/react/js/2.9f265ca3.chunk.js.map",
+    "../../templates/index.html": "/static/react/../../templates/index.html",
+    "/css/main.58f0c2db.chunk.css.map": "/static/react//css/main.58f0c2db.chunk.css.map",
+    "/media/WhatsApp Audio 2019-11-12 at 9.22.30 PM.mpeg": "/static/react//media/WhatsApp Audio 2019-11-12 at 9.22.30 PM.d6040c63.mpeg",
+    "js/2.9f265ca3.chunk.js.LICENSE": "/static/react/js/2.9f265ca3.chunk.js.LICENSE",
+    "precache-manifest.eed9d1c2c58771f2f9467fe116287d7c.js": "/static/react/precache-manifest.eed9d1c2c58771f2f9467fe116287d7c.js",
+    "service-worker.js": "/static/react/service-worker.js"
+  },
+  "entrypoints": [
+    "js/runtime-main.fe911859.js",
+    "js/2.9f265ca3.chunk.js",
+    "/css/main.58f0c2db.chunk.css",
+    "js/main.c33bac45.chunk.js"
+  ]
+}
